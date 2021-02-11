@@ -7,6 +7,7 @@ const taskRoutes = require('../routes/taskRoutes');
 const {checkUser}= require('../middleware/authMiddleware');
 
 const server = express();
+const port = process.env.PORT || 3000;
 
 //middle ware
 server.use(express.static('../public'));
@@ -22,10 +23,11 @@ server.set('view engine', 'ejs');
 server.set('views','../views');
 server.locals.moment = require('moment');
 
+
 const dbURI = 'mongodb+srv://taskAdmin:in5q6kN2Bnm3nSP@cluster0.3a6id.gcp.mongodb.net/TaskHandler?retryWrites=true&w=majority'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result)=>{
-      server.listen(3000);
+      server.listen(port);
       console.log('connected to db successfully')
       console.log('listening on port 3000')
   })
