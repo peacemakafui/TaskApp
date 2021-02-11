@@ -5,6 +5,8 @@ const { response } = require('express');
 const authRoutes = require('../routes/authRoutes');
 const taskRoutes = require('../routes/taskRoutes');
 const {checkUser}= require('../middleware/authMiddleware');
+const path = require('path');
+
 
 const server = express();
 const port = process.env.PORT || 3000;
@@ -23,7 +25,13 @@ server.set('view engine', 'ejs');
 server.set('views','../views');
 server.locals.moment = require('moment');
 
-
+//heroku config
+if(process.env.NODE_ENV === 'production'){
+  server.use(express.static('../views/build'));
+  server.get('*', (request,response)=>{
+    response.sendFile(path.resolve(__dirname, 'views', 'build', 'index.html'));
+  });
+}
 const dbURI = 'mongodb+srv://taskAdmin:in5q6kN2Bnm3nSP@cluster0.3a6id.gcp.mongodb.net/TaskHandler?retryWrites=true&w=majority'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result)=>{
