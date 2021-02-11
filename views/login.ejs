@@ -1,0 +1,56 @@
+<%- include('partials/header'); -%>
+
+<form action="">
+    <h1>Login</h1>
+    <label for="email">Email</label>
+    <input type="text" name="email" required />
+    <div class="email error"></div>
+    <label for="password">Password</label>
+    <input type="password" name="password" required />
+    <div class="password error"></div>
+    <button>Login</button>
+</form>
+
+<%- include('partials/footer'); -%>
+<!--script to fire the sigunp button and get the values from the form-->
+<script>
+    const form = document.querySelector('form');
+    //handling error on our front end
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+
+    form.addEventListener('submit',async (event) =>{
+        event.preventDefault();
+
+        //reset errors on the page every time the login button is pressed
+        emailError.textContent = '';
+        passwordError.textContent = '';
+
+        //get the form values
+        const email = form.email.value;
+        const password = form.password.value;
+        
+        //code to post user data to the server has to be asynchronous
+        try{
+            const response = await fetch('/login',{
+                method: 'POST',
+                body: JSON.stringify({email, password}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            //code for parsing the error into the form
+            const data = await response.json();
+            
+            if(data.errorsObj){
+               emailError.textContent = data.errorsObj.email;
+               passwordError.textContent = data.errorsObj.password;
+            }
+            //redirecting user to homepage after logging in
+            if(data.user){
+                location.assign('/');
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    });
+</script>

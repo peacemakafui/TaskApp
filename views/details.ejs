@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="details content">
+        <h2><%= task.title %></h2>
+        <div class="content">
+            <p><%= task.body %></p><br>
+            <p>Task Due on: <%= moment(task.dueDate).format("dddd, MMMM Do YYYY" ) %></p>
+            <p>Started Task on: <%= moment(task.startDate).format("dddd, MMMM Do YYYY" ) %></p>
+        </div>
+        <a class="edit" href="/taskBoard/edit/<%= task._id %> ">Edit</a>
+        <a class="delete" data-doc="<%= task._id %>">
+            <img src="/trashcan.svg" alt="delete icon">
+        </a>
+        
+        
+    </div>
+  
+    <%- include('./partials/footer.ejs') %>
+    
+    <!--the delete button code -->
+    <script>
+        //delete code
+        const trashcan = document.querySelector('a.delete');
+
+        trashcan.addEventListener('click', (event)=>{
+            const endpoint = `/taskBoard/${trashcan.dataset.doc}`;
+            //sending a delete request to our server
+            //this is an ajax request
+            fetch(endpoint,{
+                method: 'DELETE'
+            })
+            .then((response)=> response.json())
+            .then((data)=>{
+                window.location.href = data.redirect;
+            })
+            .catch((error)=>{console.log(error)});
+            
+        });
+        //update task code
+
+    </script>
+</body>
+</html>
