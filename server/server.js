@@ -26,7 +26,7 @@ server.set('views','../views');
 server.locals.moment = require('moment');
 
 
-const dbURI = 'mongodb+srv://taskAdmin:in5q6kN2Bnm3nSP@cluster0.3a6id.gcp.mongodb.net/TaskHandler?retryWrites=true&w=majority'
+const dbURI = '<mongodb_connection>'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result)=>{
       server.listen(port);
