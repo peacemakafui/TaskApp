@@ -27,7 +27,7 @@ const checkUser = (request, response, next)=>{
     const token = request.cookies.jwt;
 
     if(token){
-        jwt.verify(token, 'net ninja secret', async (error, decodedToken)=>{
+        jwt.verify(token, 'hashing_key', async (error, decodedToken)=>{
             if(error){
                 console.log(error.message);
                 response.locals.user = null;
