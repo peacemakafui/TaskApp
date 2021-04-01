@@ -2,6 +2,7 @@
 Link to application demo : https://limitless-retreat-38637.herokuapp.com/
 
 The Task Application, is a utility application that I am developing to help developers manage their tasks and projects in a very simple way.
+I used the `mvc` pattern to structure my application
 
 To run it locally:
 
@@ -13,9 +14,11 @@ To run it locally:
 6. once that is done get your `db uri`
 7. cd into the server folder and locate the server.js file
 8. In it you need to look for the `db uri` replace the placeholder value with your db uri from mongodb atlas
-9. Afterwards type `npm start`
-10. move to your browser, it should load the localhost automatically
-11. view the application
+9. if you are not in the server folder cd into it to start the application
+10. you do that by typing `nodemon server` 
+11. or you can use `npm start` if you are in the root directory
+12. move to your browser, it should load the localhost automatically
+13. view the application
 
 # Features
 Currently you can just create a task, edit and delete it. also there is authentication as well
