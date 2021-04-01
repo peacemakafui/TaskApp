@@ -17,14 +17,14 @@ To run it locally:
 10. move to your browser, it should load the localhost automatically
 11. view the application
 
-#Features
+# Features
 Currently you can just create a task, edit and delete it. also there is authentication as well
 What I want to add is:
 1. A way to share tasks with colleagues, like a group functionality
 2. A chat feature, which is already a separate appliction I have built
 more features to come as i brainstorm
 
-#Downsides
+# Downsides
 Though you can only access the dashboard when you create an account, because the data is fetched from the same task collection
 when you create a task when another person signs up they get to see what you have created.
 Am learning how to make it a single user view , that way each user would have their own collection.
